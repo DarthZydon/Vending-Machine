@@ -1,4 +1,4 @@
-package com.techelevator.view;
+package com.techelevator;
 
 public class Product {
 
@@ -22,6 +22,11 @@ public class Product {
     public int getCount() {
         return count;
     }
+
+    public int reduceCount() {
+        return --count;
+    }
+
 
     public Product(String name, int price, String category, int count) {
         this.name = name;

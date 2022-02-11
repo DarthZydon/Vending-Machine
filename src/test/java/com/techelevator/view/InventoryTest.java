@@ -1,5 +1,7 @@
 package com.techelevator.view;
 
+import com.techelevator.Inventory;
+import com.techelevator.Product;
 import org.junit.Test;
 
 import java.io.FileNotFoundException;

@@ -1,4 +1,4 @@
-package com.techelevator.view;
+package com.techelevator;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,10 +14,6 @@ public class Inventory {
     }
 
     public void load() throws FileNotFoundException {
-            }
-
-    public Map<String, Product> getInventoryMap() throws FileNotFoundException {
-
         try (Scanner fileScanner = new Scanner(userInputFile)) {
             while (fileScanner.hasNextLine()) {
                 String line = fileScanner.nextLine();
@@ -27,7 +23,10 @@ public class Inventory {
                 inventoryMap.put(splits[0], newProduct);
             }
         }
-        System.out.println(inventoryMap);
-        return null;
+    }
+
+    public Map<String, Product> getInventoryMap() throws FileNotFoundException {
+        return inventoryMap;
+
     }
 }

@@ -1,5 +1,6 @@
 package com.techelevator.view;
 
+import com.techelevator.Product;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
