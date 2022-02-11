@@ -6,7 +6,7 @@ import com.techelevator.view.Product;
 
 import java.util.Map;
 
-public class VendingMachineCLI extends Menu{
+public class VendingMachineCLI{
 
 	private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
 	private static final String MAIN_MENU_OPTION_PURCHASE = "Purchase";
@@ -21,7 +21,7 @@ public class VendingMachineCLI extends Menu{
 	private boolean getChoiceFromOptions() {
 		return false;
 	}
-	
+
 	public String run() {
 		while (true) {
 			String choice = (String) menu.getChoiceFromOptions(MAIN_MENU_OPTIONS);

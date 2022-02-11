@@ -1,8 +1,7 @@
 package com.techelevator.view;
 
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.PrintWriter;
+import java.io.*;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Menu {
@@ -49,5 +48,13 @@ public class Menu {
 		}
 		out.print(System.lineSeparator() + "Please choose an option >>> ");
 		out.flush();
+	}
+
+
+	Inventory newInv = new Inventory();
+
+	public void menuDisplay() throws FileNotFoundException {
+		System.out.println(newInv.getInventoryMap());
+
 	}
 }
