@@ -2,16 +2,13 @@ package com.techelevator.view;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 
 
 public class Inventory {
 
     private static final String FILEPATH = "vendingmachine.csv";
-    private Map<String, Product> inventoryMap = new TreeMap<>();
+    public Map<String, Product> inventoryMap = new TreeMap<>();
 
     public void load() throws FileNotFoundException {
 
@@ -27,6 +24,9 @@ public class Inventory {
             }
         }
     }
+
+    public Map<String, Product> inventory = inventoryMap;
+
 
     public Map<String, Product> getInventoryMap() {
         return inventoryMap;
