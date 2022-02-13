@@ -1,7 +1,6 @@
 package com.techelevator;
 
 import com.techelevator.view.Menu;
-
 import java.io.FileNotFoundException;
 import java.util.Map;
 import java.util.Scanner;
@@ -38,7 +37,7 @@ public class VendingMachineCLI {
 		Map<String, Product> productMap = inventory.getInventory();
 		for (Map.Entry<String, Product> entry : productMap.entrySet()) {
 			Product value = entry.getValue();
-			System.out.println(entry.getKey() + " " + value.getName() + " " + value.getPrice() + " " + value.getCount());
+			System.out.println(entry.getKey() + " " + value.getName() + " " + (value.getPrice()) + " " + value.getCount());
 		}
 	}
 
@@ -71,9 +70,6 @@ public class VendingMachineCLI {
 //			} else if (choice.equals(PURCHASE_MENU_OPTION_DEPOSIT_MONEY)) {
 //				vendingMachine.feedMoney();
 
-			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
-				// vendingMachine.selectProduct(getChoiceFromOptions());
-				run = false;
 
 			} else if (choice.equals(PURCHASE_MENU_OPTION_FEED_MONEY)) {
 				System.out.println("Deposit Money in Whole Dollar Amounts");
@@ -86,8 +82,9 @@ public class VendingMachineCLI {
 				}
 
 			} else if (choice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
-				System.out.println("Enter Product ID: ");
 				showProducts(inventory);
+				System.out.println("");
+				System.out.print("Enter Product ID: ");
 				String slotID = in.nextLine();
 				try {
 					Product product = vm.selectProduct(slotID);
@@ -102,18 +99,21 @@ public class VendingMachineCLI {
 						System.out.println("Chew, Chew, Yum!");
 					}
 				} catch (VendExceptions vendExceptions) {
-					System.out.println("Sale Failed, Please Try Again");
+					System.out.println("Sale Failed, Please Add More Money and Try Again");
 				}
 			} else if (choice.equals(PURCHASE_MENU_OPTION_END_TRANSACTION)) {
 				int change = vm.finishTransaction();
 				System.out.println("Change Due: " + change / 100.0);
+				activeMenu = MAIN_MENU_OPTIONS;
+
+			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
+				// vendingMachine.selectProduct(getChoiceFromOptions());
+				System.out.println("Thanks for Viewing Our Products");
+				run = false;
 			}
 
-			activeMenu = MAIN_MENU_OPTIONS;
 		}
 	}
-
-
 			public static void main(String[] args) throws FileNotFoundException {
 				Menu menu = new Menu(System.in, System.out);
 				VendingMachineCLI cli = new VendingMachineCLI(menu);
