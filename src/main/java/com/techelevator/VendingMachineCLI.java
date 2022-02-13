@@ -8,16 +8,25 @@ import java.util.Scanner;
 
 public class VendingMachineCLI{
 
+
+
 	private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
 	private static final String MAIN_MENU_OPTION_PURCHASE = "Purchase";
-	private static final String PURCHASE_MENU_OPTION_DEPOSIT_MONEY = "Customer Makes Deposit";
-	private static final String PURCHASE_MENU_OPTION_SELECT_PRODUCT = "Display Selected Product";
+	private static final String MAIN_MENU_OPTION_EXIT = "Exit Main Menu";
+	private static final String PURCHASE_MENU_OPTION_SELECT_PRODUCT = "Select Product";
 	private static final String PURCHASE_MENU_OPTION_END_TRANSACTION = "End Transaction";
-	private static final String[] MAIN_MENU_OPTIONS = { MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE };
+	private static final String PURCHASE_MENU_OPTION_DEPOSIT_MONEY = "Deposit Money";
+
+	private static final String DEPOSIT_MENU_OPTIONS_DOLLAR_AMOUNT = "Please Deposit $1, $5, or $10";
+	private static final String DEPOSIT_MENU_OPTIONS_EXIT = "Exit from Deposit Menu";
+
+	private static final String[] MAIN_MENU_OPTIONS = { MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE, MAIN_MENU_OPTION_EXIT };
 	private static final String[] PURCHASE_MENU_OPTIONS = { PURCHASE_MENU_OPTION_DEPOSIT_MONEY, PURCHASE_MENU_OPTION_SELECT_PRODUCT, PURCHASE_MENU_OPTION_END_TRANSACTION };
+	private static final String[] DEPOSIT_MENU_OPTIONS = { DEPOSIT_MENU_OPTIONS_DOLLAR_AMOUNT, DEPOSIT_MENU_OPTIONS_EXIT };
+
 
 	private Menu menu;
-	private VendingMachine vendingMachine = new VendingMachine("vendingmachine.csv");
+//	private VendingMachine vendingMachine = new VendingMachine("vendingmachine.csv");
 
 
 	public VendingMachineCLI(Menu menu) {
@@ -36,25 +45,33 @@ public class VendingMachineCLI{
 
 			if (choice.equals(MAIN_MENU_OPTION_DISPLAY_ITEMS)) {
 				// display vending machine items
-				Map<String, Product> workingInv = vendingMachine.getWorkingInventory().inventoryMap;
+				Map<String, Product> workingInv = vendingMachine.getInventory().inventory;
 				for (Map.Entry<String, Product> entry : workingInv.entrySet()) {
 					System.out.println(entry.getKey() + " " + entry.getValue().getName() + " " + entry.getValue().getPrice());
 				}
 
 			} else if (choice.equals(MAIN_MENU_OPTION_PURCHASE)) {
-				// do purchase
-				//TO DO : User should enter this value through scanner
+				// deposit money
+				// select product to purchase
+				// end transaction
 				activeMenu = PURCHASE_MENU_OPTIONS;
 
-			} else if (choice.equals(PURCHASE_MENU_OPTION_DEPOSIT_MONEY)) {
-				String deposit = (String) menu.getChoiceFromOptions(DEPOSIT_MENU_OPTIONS);
-				vendingMachine.feedMoney(deposit);
+//			} else if (choice.equals(PURCHASE_MENU_OPTION_DEPOSIT_MONEY)) {
+//				vendingMachine.feedMoney();
 
 			} else if (choice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
-				vendingMachine
+					// vendingMachine.selectProduct(getChoiceFromOptions());
+					System.out.println("select product code");
 
 			} else if (choice.equals(PURCHASE_MENU_OPTION_END_TRANSACTION)) {
-				vendingMachine.finishTransaction();
+				activeMenu = MAIN_MENU_OPTIONS;
+				}
+//
+//			} else if (choice.equals(PURCHASE_MENU_OPTION_SELECT_PRODUCT)) {
+//				vendingMachine.selectProduct()
+//
+//			} else if (choice.equals(PURCHASE_MENU_OPTION_END_TRANSACTION)) {
+//				vendingMachine.finishTransaction();
 			}
 
 //				Product product = null;
@@ -66,13 +83,13 @@ public class VendingMachineCLI{
 //				}
 
 			}
-		}
+
 
 	public static void main(String[] args) {
 		Menu menu = new Menu(System.in, System.out);
 		VendingMachineCLI cli = new VendingMachineCLI(menu);
 		try {
-			cli.vendingMachine.getWorkingInventory().load();
+			cli.vendingMachine.getInventory().load();
 		} catch (FileNotFoundException e) {
 			System.out.println("Couldn't load the inventory " + e.getMessage());
 		}

@@ -55,7 +55,9 @@ public class Menu {
 	Inventory newInv = new Inventory();
 
 	public void menuDisplay() throws FileNotFoundException {
-		System.out.println(newInv.getInventoryMap());
+		System.out.println(newInv.getInventory());
 
 	}
+
+
 }

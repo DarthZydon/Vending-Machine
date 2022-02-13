@@ -14,7 +14,7 @@ public class InventoryTest {
     @Test
     public void load() throws FileNotFoundException {
         Inventory inventoryTest = new Inventory();
-        Map<String, Product> inventoryMap = inventoryTest.getInventoryMap();
+        Map<String, Product> inventoryMap = inventoryTest.getInventory();
         assertEquals(0, inventoryMap.size());
         inventoryTest.load();
         assertEquals(16, inventoryMap.size());
