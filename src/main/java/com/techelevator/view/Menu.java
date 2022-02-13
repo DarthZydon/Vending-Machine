@@ -51,13 +51,10 @@ public class Menu {
 		out.flush();
 	}
 
-
 	Inventory newInv = new Inventory();
 
 	public void menuDisplay() throws FileNotFoundException {
 		System.out.println(newInv.getInventory());
 
 	}
-
-
 }
