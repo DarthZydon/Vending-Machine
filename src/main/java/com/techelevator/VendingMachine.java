@@ -19,32 +19,33 @@ public class VendingMachine {
         customerBalance += dollars * 100;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/YYYY hh:mm:ss a");
         LocalDateTime time = LocalDateTime.now();
-        logWriter(String.format(time.format(formatter) + " " + "FEED MONEY" + " " + dollars + " " + customerBalance));
+        logWriter(String.format(String.format("%s FEED MONEY $%.2f $%.2f", time.format(formatter), (double) dollars, customerBalance / 100.0)));
         return customerBalance;
     }
 
     public int getCustomerBalance() {
-        return (int) ((double) customerBalance / 100.00);
+//        return (int) ((double) customerBalance / 100.00);
+        return customerBalance;
     }
 
-    public Product selectProduct(String slotID) throws VendExceptions, FileNotFoundException {
+    public Product selectProduct(String slotID) throws VendException, FileNotFoundException {
 
         Map<String, Product> map = inventory.getInventory();
         Product product = map.get(slotID);
 
         if (!inventory.getInventory().containsKey(slotID)) {
             //product does not exist
-            throw new VendExceptions("Product does not exist, select another");
+            throw new VendException("Product does not exist, select another");
         }
 
         else if (product.getCount() == 0) {
             //product is sold out
-            throw new VendExceptions("SOLD OUT");
+            throw new VendException("SOLD OUT");
         }
 
         else if (customerBalance < product.getPrice()) {
             //customer doesn't have enough money
-            throw new VendExceptions("You don't have enough money");
+            throw new VendException("You don't have enough money");
         }
 
         customerBalance -= product.getPrice();
@@ -52,7 +53,7 @@ public class VendingMachine {
         product.reduceCount();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/YYYY hh:mm:ss a");
         LocalDateTime time = LocalDateTime.now();
-        logWriter(String.format(time.format(formatter) + " " + product.getName() + " " + slotID + " " + product.getPrice() + " " + customerBalance));
+        logWriter(String.format(String.format("%s %s %s $%.2f $%.2f", time.format(formatter), product.getName(), slotID, product.getPrice() / 100.0, customerBalance / 100.0)));
         return product;
     }
 
@@ -62,7 +63,7 @@ public class VendingMachine {
         customerBalance = 0;
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/YYYY hh:mm:ss a");
         LocalDateTime time = LocalDateTime.now();
-        logWriter(String.format(time.format(formatter) + " GIVE CHANGE: " +  change + " " + customerBalance));
+        logWriter(String.format(String.format("%s GIVE CHANGE: $%.2f $%.2f", time.format(formatter), change / 100.0, customerBalance / 100.0)));
         return change;
     }
 
