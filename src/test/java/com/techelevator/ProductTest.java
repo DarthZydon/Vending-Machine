@@ -44,6 +44,11 @@ public class ProductTest {
     }
     @Test
     public void reduceCount() {
+        Product product = new Product("someProduct", 200, "Chip", 2);
+        assertEquals(2, product.getCount());
+        assertEquals(1, product.reduceCount());
+        assertEquals(1, product.getCount());
+
 
     }
 
