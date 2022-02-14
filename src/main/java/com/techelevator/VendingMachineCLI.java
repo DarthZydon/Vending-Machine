@@ -1,7 +1,8 @@
 package com.techelevator;
 
 import com.techelevator.view.Menu;
-import java.io.FileNotFoundException;
+
+import java.io.*;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -84,7 +85,7 @@ public class VendingMachineCLI {
 						System.out.println("Chew, Chew, Yum!");
 					}
 				} catch (VendExceptions vendExceptions) {
-					System.out.println("Sale Failed, Please Add More Money and Try Again");
+					System.out.println("Sale Not Completed, Please Check Product Quantity or Add More Money");
 				}
 
 			} else if (choice.equals(PURCHASE_MENU_OPTION_END_TRANSACTION)) {
@@ -98,6 +99,7 @@ public class VendingMachineCLI {
 			}
 		}
 	}
+
 			public static void main(String[] args) throws FileNotFoundException {
 				Menu menu = new Menu(System.in, System.out);
 				VendingMachineCLI cli = new VendingMachineCLI(menu);

@@ -1,6 +1,8 @@
 package com.techelevator;
 
-import java.io.FileNotFoundException;
+import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 public class VendingMachine {
@@ -15,7 +17,9 @@ public class VendingMachine {
 
     public int feedMoney(int dollars) {
         customerBalance += dollars * 100;
-        //String logMessage = String.format("FEED MONEY: $%.2f $%.2f", (double) dollars, customerBalance / 100.0);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/YYYY hh:mm:ss a");
+        LocalDateTime time = LocalDateTime.now();
+        logWriter(String.format(time.format(formatter) + " " + "FEED MONEY" + " " + dollars + " " + customerBalance));
         return customerBalance;
     }
 
@@ -25,20 +29,20 @@ public class VendingMachine {
 
     public Product selectProduct(String slotID) throws VendExceptions, FileNotFoundException {
 
+        Map<String, Product> map = inventory.getInventory();
+        Product product = map.get(slotID);
+
         if (!inventory.getInventory().containsKey(slotID)) {
             //product does not exist
             throw new VendExceptions("Product does not exist, select another");
         }
 
-        Map<String, Product> map = inventory.getInventory();
-        Product product = map.get(slotID);
-
-        if (product.getCount() == 0) {
+        else if (product.getCount() == 0) {
             //product is sold out
             throw new VendExceptions("SOLD OUT");
         }
 
-        if (customerBalance < product.getPrice()) {
+        else if (customerBalance < product.getPrice()) {
             //customer doesn't have enough money
             throw new VendExceptions("You don't have enough money");
         }
@@ -46,7 +50,9 @@ public class VendingMachine {
         customerBalance -= product.getPrice();
         machineBalance += product.getPrice();
         product.reduceCount();
-        //String logMessage = String.format("%s %s %.2f %.2f", product.getName(), slotID, product.getPrice(), customerBalance / 100.0);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/YYYY hh:mm:ss a");
+        LocalDateTime time = LocalDateTime.now();
+        logWriter(String.format(time.format(formatter) + " " + product.getName() + " " + slotID + " " + product.getPrice() + " " + customerBalance));
         return product;
     }
 
@@ -54,9 +60,20 @@ public class VendingMachine {
         //end transaction, return change
         int change = customerBalance;
         customerBalance = 0;
-        //String logMessage = String.format("GIVE CHANGE: $%.2f $%.2f",  change/100.0, customerBalance/100.0);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/YYYY hh:mm:ss a");
+        LocalDateTime time = LocalDateTime.now();
+        logWriter(String.format(time.format(formatter) + " GIVE CHANGE: " +  change + " " + customerBalance));
         return change;
     }
-}
+
+    public void logWriter(String logEntry) {
+        try {
+            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("Log.txt", true)));
+            out.println(logEntry);
+            out.close();
+        } catch (IOException e) {
+        }
+    }
+  }
 
 
