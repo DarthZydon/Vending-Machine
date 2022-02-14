@@ -1,7 +1,8 @@
-package com.techelevator.view;
+package com.techelevator;
 
 import com.techelevator.Product;
 import org.junit.Test;
+import org.junit.experimental.theories.suppliers.TestedOn;
 
 import static org.junit.Assert.*;
 
@@ -41,4 +42,9 @@ public class ProductTest {
         Product product1 = new Product("GooChews", 150, "Gum", 5);
         assertEquals(5, product1.getCount());
     }
+    @Test
+    public void reduceCount() {
+
+    }
+
 }

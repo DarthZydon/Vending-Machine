@@ -1,5 +1,7 @@
 package com.techelevator;
 
+import com.techelevator.Product;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
