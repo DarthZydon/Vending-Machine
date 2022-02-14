@@ -30,7 +30,11 @@ public class VendingMachineCLI {
         Map<String, Product> productMap = inventory.getInventory();
         for (Map.Entry<String, Product> entry : productMap.entrySet()) {
             Product value = entry.getValue();
-            System.out.printf("%s %-20.20s $%.2f %d%n", entry.getKey(), value.getName(), value.getPrice() / 100.0, value.getCount());
+            if (value.getCount() == 0) {
+                System.out.print(entry.getKey() + " " + value.getName() + "         " + "- SOLD OUT -");
+            } else {
+                System.out.printf("%s %-20.20s $%.2f %d%n", entry.getKey(), value.getName(), value.getPrice() / 100.0, value.getCount());
+            }
         }
     }
 
@@ -91,7 +95,20 @@ public class VendingMachineCLI {
 
             } else if (choice.equals(PURCHASE_MENU_OPTION_END_TRANSACTION)) {
                 int change = vm.finishTransaction();
-                System.out.printf("Change Due: $%.2f%n", change / 100.0);
+
+                int quarters, dimes, nickels;
+                double changeInCoins = change;
+
+                quarters = (int)(change/25);
+                changeInCoins %= 25;
+                dimes = (int)(changeInCoins/10);
+                changeInCoins %= 10;
+                nickels = (int)(changeInCoins/5);
+                changeInCoins %= 5;
+
+                System.out.println("");
+                System.out.println("Change Due: " + "\nQuarters = " + quarters + "\nDimes = " + dimes + "\nNickels = " + nickels);
+
                 activeMenu = MAIN_MENU_OPTIONS;
 
             } else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
@@ -107,6 +124,3 @@ public class VendingMachineCLI {
         cli.run();
     }
 }
-
-
-

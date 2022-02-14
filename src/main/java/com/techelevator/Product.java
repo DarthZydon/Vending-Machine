@@ -27,7 +27,6 @@ public class Product {
         return --count;
     }
 
-
     public Product(String name, int price, String category, int count) {
         this.name = name;
         this.price = price;

@@ -64,7 +64,9 @@ public class VendingMachine {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/YYYY hh:mm:ss a");
         LocalDateTime time = LocalDateTime.now();
         logWriter(String.format(String.format("%s GIVE CHANGE: $%.2f $%.2f", time.format(formatter), change / 100.0, customerBalance / 100.0)));
+
         return change;
+
     }
 
     public void logWriter(String logEntry) {
@@ -76,5 +78,3 @@ public class VendingMachine {
         }
     }
   }
-
-
