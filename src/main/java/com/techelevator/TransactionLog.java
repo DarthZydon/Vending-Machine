@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class TransactionLog {
-    public void time(){
+    public void time() {
         DateTimeFormatter formatter =
                 DateTimeFormatter.ofPattern("dd/MM/YYYY HH:mm:ss");
         LocalDateTime time = LocalDateTime.now();

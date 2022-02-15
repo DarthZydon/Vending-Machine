@@ -1,7 +1,5 @@
 package com.techelevator;
 
-import com.techelevator.Product;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -30,7 +28,6 @@ public class Inventory {
 
                 //create Product with new Product variables
                 Product product = new Product(productName, productPrice, productCategory, productQuantity);
-
                 inventory.put(slotID, product);
             }
         }

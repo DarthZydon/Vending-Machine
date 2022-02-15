@@ -24,7 +24,6 @@ public class VendingMachine {
     }
 
     public int getCustomerBalance() {
-//        return (int) ((double) customerBalance / 100.00);
         return customerBalance;
     }
 
@@ -36,14 +35,10 @@ public class VendingMachine {
         if (!inventory.getInventory().containsKey(slotID)) {
             //product does not exist
             throw new VendException("Product does not exist, select another");
-        }
-
-        else if (product.getCount() == 0) {
+        } else if (product.getCount() == 0) {
             //product is sold out
             throw new VendException("SOLD OUT");
-        }
-
-        else if (customerBalance < product.getPrice()) {
+        } else if (customerBalance < product.getPrice()) {
             //customer doesn't have enough money
             throw new VendException("You don't have enough money");
         }
@@ -64,9 +59,7 @@ public class VendingMachine {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/YYYY hh:mm:ss a");
         LocalDateTime time = LocalDateTime.now();
         logWriter(String.format(String.format("%s GIVE CHANGE: $%.2f $%.2f", time.format(formatter), change / 100.0, customerBalance / 100.0)));
-
         return change;
-
     }
 
     public void logWriter(String logEntry) {
@@ -77,4 +70,4 @@ public class VendingMachine {
         } catch (IOException e) {
         }
     }
-  }
+}

@@ -99,11 +99,11 @@ public class VendingMachineCLI {
                 int quarters, dimes, nickels;
                 double changeInCoins = change;
 
-                quarters = (int)(change/25);
+                quarters = (int) (change / 25);
                 changeInCoins %= 25;
-                dimes = (int)(changeInCoins/10);
+                dimes = (int) (changeInCoins / 10);
                 changeInCoins %= 10;
-                nickels = (int)(changeInCoins/5);
+                nickels = (int) (changeInCoins / 5);
                 changeInCoins %= 5;
 
                 System.out.println("");
@@ -112,7 +112,8 @@ public class VendingMachineCLI {
                 activeMenu = MAIN_MENU_OPTIONS;
 
             } else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
-                System.out.println("Thanks for Your Business");
+                System.out.println("");
+                System.out.println("Thanks for Your Business!");
                 run = false;
             }
         }
